@@ -8,6 +8,8 @@ local previewers = require'telescope.previewers'
 local utils = require'telescope.utils'
 local popup=require'popup'
 
+local terraform_a = require'telescope._extensions.terraform_actions'
+
 -- referred by https://github.com/nvim-telescope/telescope-github.nvim/blob/master/lua/telescope/_extensions/gh_builtin.lua#L37
 local function msgLoadingPopup(msg,cmd,complete_fn)
   local row = math.floor((vim.o.lines-5) / 2)
@@ -43,23 +45,24 @@ M.state_list = function(opts)
 
   local bin = vim.fn.expand(opts.bin)
   local title = 'Terraform States'
-  local cmd = vim.tbl_flatten({'terraform', 'state', 'list'})
-  msgLoadingPopup('Loading ' .. title, cmd, function(results)
-    pickers.new(opts, {
-      prompt_title = 'Terraform States',
-      finder = finders.new_table{
-        results = results,
-        entry_marker = make_entry.gen_from_string(opts)
-      },
-      previewer = previewers.new_termopen_previewer{
-        get_command = function(entry)
-          local state = from_entry.path(entry)
-          return {bin, 'state', 'show', state}
-        end,
-      },
-      sorter = conf.file_sorter(opts),
-    }):find()
-  end)
+  pickers.new(opts, {
+    prompt_title = title,
+    finder = finders.new_oneshot_job(
+      {bin, 'state', 'list'}
+    ),
+    previewer = previewers.new_termopen_previewer{
+      get_command = function(entry)
+        local state = from_entry.path(entry)
+        return {bin, 'state', 'show', state}
+      end,
+    },
+    sorter = conf.file_sorter(opts),
+    attach_mappings = function(_, map)
+      map('i','r',terraform_a.state_rm)
+      return true
+    end,
+    selection = 'reset',
+  }):find()
 end
 
 return M

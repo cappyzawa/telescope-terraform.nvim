@@ -25,3 +25,9 @@ Now supports `terraform state list` only.
 ### list
 
 `:Telescope terraform state_list`
+
+#### Key mappings
+
+|key| usage |
+|:---:|:---|
+|`r`| remove the selected state |
