@@ -8,9 +8,10 @@
 
 ```lua
 use{
-  'nvim-telescope/telescope.nvim',
+  'cappyzawa/telescope-terraform.nvim',
   requires = {
-    'nvim-telescope/telescope-terraform.nvim',
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
   },
   config = function()
     require'telescope'.load_extension'terraform'
@@ -30,4 +31,4 @@ Now supports `terraform state list` only.
 
 |key| usage |
 |:---:|:---|
-|`r`| remove the selected state |
+|`d`| remove the selected state |
