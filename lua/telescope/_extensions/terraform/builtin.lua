@@ -31,8 +31,10 @@ M.state_list = function(opts)
     },
     sorter = conf.file_sorter(opts),
     attach_mappings = function(_, map)
-      map('i','d',terraform_a.state_rm)
-      map('n','d',terraform_a.state_rm)
+			map('i', '<CR>', nil)
+			map('n', '<CR>', nil)
+      map('i','d',terraform_a.remove_state)
+      map('n','d',terraform_a.remove_state)
       return true
     end,
     selection = 'reset',

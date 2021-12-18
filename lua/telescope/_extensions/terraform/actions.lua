@@ -8,7 +8,7 @@ local function close_telescope_prompt(prompt_bufnr)
   actions.close(prompt_bufnr)
 end
 
-A.state_rm = function(prompt_bufnr)
+A.remove_state = function(prompt_bufnr)
   local selection = actions.get_selected_entry(prompt_bufnr)
   Job:new({
     command = 'terraform',
