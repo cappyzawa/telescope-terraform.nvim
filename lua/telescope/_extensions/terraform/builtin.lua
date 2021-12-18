@@ -1,12 +1,9 @@
-local actions = require'telescope.actions'
 local conf = require'telescope.config'.values
 local finders = require'telescope.finders'
 local from_entry = require'telescope.from_entry'
-local make_entry = require'telescope.make_entry'
 local pickers = require'telescope.pickers'
 local previewers = require'telescope.previewers'
 local utils = require'telescope.utils'
-local popup = require('plenary.popup')
 
 local terraform_a = require'telescope._extensions.terraform.actions'
 local M = {}
