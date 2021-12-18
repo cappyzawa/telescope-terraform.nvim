@@ -8,7 +8,7 @@ local previewers = require'telescope.previewers'
 local utils = require'telescope.utils'
 local popup = require('plenary.popup')
 
-local terraform_a = require'telescope._extensions.terraform_actions'
+local terraform_a = require'telescope._extensions.terraform.actions'
 local M = {}
 
 M.state_list = function(opts)
